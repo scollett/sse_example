@@ -10,8 +10,7 @@ To install, you will need to install the sinatra gem:
 And then startup the application:
 
   > ruby server/sse_server.rb
-	
-	> ruby client/sse_client.rb
+	  ruby client/sse_client.rb
 	
 Then navigate to the client's page in your browser:	
 
