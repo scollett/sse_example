@@ -24,7 +24,7 @@ The underlying javascript on the client page will create an EventSource object a
 
 Then call the message endpoint on the sse server to post a new message in a separate browser tab: 
 ```
-http://localhost:3000/sse/message?message=This%20Is%20A%20Test
+http://localhost:3000/sse/message?message=Hello%20World!
 ```
 		
 The client in your first browser window, http://localhost:4567, should now display a timestamp and your message.

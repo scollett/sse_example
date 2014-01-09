@@ -1,6 +1,8 @@
 require 'sinatra'
 
 set port: '3000'
+set :bind, '0.0.0.0'
+set server: 'thin'
 
 connections = []  
   
@@ -30,14 +32,21 @@ get '/sse/message' do
     out << "data: #{Time.now} -> #{params[:message]}" << "\n\n"
   end
     
-  "message_received"
+  "message_received (#{params[:message]})"
+end
+
+# -------------------------------------------------------------------------------
+# Forwards to the message end point with an example 'Hello World!'  
+# -------------------------------------------------------------------------------
+get '/' do
+  redirect '/sse/message?message=Hello%20World!'
 end
 
 # -------------------------------------------------------------------------------
 # Default HTTP Headers for all responses 
 # -------------------------------------------------------------------------------
 before do
-  response['Access-Control-Allow-Origin'] = 'http://localhost:4567'
+  response['Access-Control-Allow-Origin'] = env['HTTP_ORIGIN']
   response['Cache-Control'] = 'no-cache'
   content_type 'text/event-stream'
 end
